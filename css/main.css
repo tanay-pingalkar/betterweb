@@ -1,0 +1,22 @@
+*,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav {
+  display: flex;
+  width: 100%;
+  font-size: 20px;
+  background-color: aquamarine;
+  font-weight: 700;
+  padding-left: 20px;
+}
+
+.main-nav a {
+  padding: 10px;
+}
+
+.main-nav a:hover {
+  box-shadow: inset 0px 0px 0px 3px rgb(0, 0, 0);
+}
