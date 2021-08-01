@@ -25,7 +25,7 @@ const css = await readDir("css");
 const publicF = await readDir("public");
 
 const server = Deno.listen({ port: 8080 });
-console.log(`HTTP webserver running.  Access it at:  http://localhost:8080/`);
+console.log(`better web started at http://localhost:8080/`);
 
 for await (const conn of server) {
   (async () => {
