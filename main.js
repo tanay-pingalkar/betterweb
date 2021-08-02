@@ -85,7 +85,7 @@ for await (const conn of server) {
       } else if (url.pathname.startsWith("/css")) {
         if (request.method == "GET") {
           res = css[url.pathname];
-
+          headers["Content-type"] = "text/css";
           status = 200;
         }
       } else if (url.pathname.startsWith("/public")) {
