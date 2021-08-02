@@ -46,13 +46,35 @@ for await (const conn of server) {
           status = 200;
         }
       }
-      if (url.pathname == "/user") {
+      if (url.pathname == "/user/posts") {
         if (request.method == "GET") {
-          res = Main(User());
+          res = Main(User({ html: "this are posts" }));
           status = 200;
           headers["Content-type"] = "text/html";
         } else if (request.method === "POST") {
-          res = JSON.stringify(User());
+          const { from } = await request.json();
+          if (from.startsWith("/user")) {
+            res = JSON.stringify({ html: "this are posts" });
+          } else {
+            res = JSON.stringify(User({ html: "this are posts" }));
+          }
+
+          status = 200;
+        }
+      }
+      if (url.pathname == "/user/comments") {
+        if (request.method == "GET") {
+          res = Main(User({ html: "this are comments" }));
+          status = 200;
+          headers["Content-type"] = "text/html";
+        } else if (request.method === "POST") {
+          const { from } = await request.json();
+          if (from.startsWith("/user")) {
+            res = JSON.stringify({ html: "this are comments" });
+          } else {
+            res = JSON.stringify(User({ html: "this are comments" }));
+          }
+
           status = 200;
         }
       } else if (url.pathname.startsWith("/js")) {

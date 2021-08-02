@@ -1,0 +1,40 @@
+#!/usr/bin/env -S deno run --allow-read --allow-run --unstable
+
+const watcher = Deno.watchFs("./");
+
+let p;
+
+(async () => {
+  p = Deno.run({
+    cmd: [
+      "deno",
+      "run",
+      "--unstable",
+      "--allow-net",
+      "--allow-read",
+      "main.js",
+    ],
+  });
+  await p.status();
+})();
+
+for await (const event of watcher) {
+  if (event.kind != "access") {
+    (async () => {
+      p.kill(Deno.Signal.SIGKILL);
+
+      p = Deno.run({
+        cmd: [
+          "deno",
+          "run",
+          "--unstable",
+          "--allow-net",
+          "--allow-read",
+          "main.js",
+        ],
+      });
+
+      await p.status();
+    })();
+  }
+}
